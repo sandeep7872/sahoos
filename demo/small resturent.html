@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savory Bites | Gourmet Dining Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #f1faee;
+            --dark: #1d3557;
+            --light: #a8dadc;
+            --accent: #457b9d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(29, 53, 87, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+        
+        .about {
+            background-color: white;
+        }
+        
+        .about-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+            padding-right: 3rem;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu {
+            background-color: var(--secondary);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #c1121f;
+        }
+        
+        .recommendations {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .recommendations .section-title {
+            color: white;
+        }
+        
+        .restaurant-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .restaurant-card {
+            background-color: white;
+            color: #333;
+            border-radius: 10px;
+            width: 300px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .restaurant-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .restaurant-card p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            flex: 1;
+            padding-right: 3rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .social-links {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            transform: translateX(100%);
+        }
+        
+        .cart-modal.active {
+            display: block;
+            transform: translateX(0);
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .cart-items {
+            padding: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            background-color: #eee;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quantity {
+            margin: 0 0.5rem;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .cart-total {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+        
+        .cart-total p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Checkout Modal */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            z-index: 2000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .checkout-modal.active {
+            display: block;
+        }
+        
+        .checkout-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .checkout-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .checkout-form .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .checkout-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-container,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .about-text,
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+               position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition); 
+            }
+            
+            .cart-modal {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <p>Total: $<span id="cartTotal">0.00</span></p>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-outline" id="continueShopping">Continue Shopping</button>
+            <button class="btn" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+    
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-header">
+            <h3>Checkout</h3>
+            <p>Please enter your details to complete your order</p>
+        </div>
+        <form class="checkout-form" id="checkoutForm">
+            <div class="form-group">
+                <label for="checkoutName">Full Name</label>
+                <input type="text" id="checkoutName" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutPhone">Phone Number</label>
+                <input type="tel" id="checkoutPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutEmail">Email</label>
+                <input type="email" id="checkoutEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutAddress">Delivery Address</label>
+                <input type="text" id="checkoutAddress" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutNotes">Special Instructions</label>
+                <textarea id="checkoutNotes"></textarea>
+            </div>
+            <div class="checkout-actions">
+                <button type="button" class="btn btn-outline" id="cancelCheckout">Cancel</button>
+                <button type="submit" class="btn">Place Order</button>
+            </div>
+        </form>
+    </div>
+    
+    <nav>
+        <div class="logo">Savory<span>Bites</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    
+    <header id="home">
+        <div class="hero">
+            <h1>Culinary Excellence</h1>
+            <p>Experience the art of fine dining with our carefully crafted dishes made from locally sourced ingredients</p>
+            <div>
+                <a href="#menu" class="btn">Explore Menu</a>
+                <a href="#order" class="btn btn-outline" style="margin-left: 1rem;">Order Online</a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="about" class="about">
+        <h2 class="section-title">Our Story</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Tradition meets innovation</h3>
+                <p>Founded in 2010, Savory Bites has been serving exceptional cuisine that blends traditional recipes with modern techniques. Our chef, with over 20 years of experience in Michelin-starred restaurants across Europe, brings a unique perspective to every dish.</p>
+                <p>We pride ourselves on using only the freshest, locally-sourced ingredients to create memorable dining experiences for our guests. Our seasonal menu changes regularly to showcase the best produce available.</p>
+                <a href="#contact" class="btn">Reserve a Table</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Restaurant interior">
+            </div>
+        </div>
+    </section>
+    
+    <section id="menu" class="menu">
+        <h2 class="section-title">Our Signature Dishes</h2>
+        <div class="menu-grid">
+            <div class="menu-item" data-id="1" data-name="Truffle Infused Risotto" data-price="24">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 1">
+                <div class="menu-item-content">
+                    <h3>Truffle Infused Risotto</h3>
+                    <p>Creamy Arborio rice with wild mushrooms, white truffle oil, and aged Parmesan</p>
+                    <span class="price">$24</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="2" data-name="Seared Scallops" data-price="28">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 2">
+                <div class="menu-item-content">
+                    <h3>Seared Scallops</h3>
+                    <p>Perfectly caramelized scallops served with pea puree and pancetta crisp</p>
+                    <span class="price">$28</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="3" data-name="Herb Crusted Lamb" data-price="32">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 3">
+                <div class="menu-item-content">
+                    <h3>Herb Crusted Lamb</h3>
+                    <p>Tender rack of lamb with rosemary crust, served with roasted vegetables</p>
+                    <span class="price">$32</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="4" data-name="Chocolate Soufflé" data-price="12">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 4">
+                <div class="menu-item-content">
+                    <h3>Chocolate Soufflé</h3>
+                    <p>Warm chocolate soufflé with vanilla bean ice cream and raspberry coulis</p>
+                    <span class="price">$12</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="5" data-name="Caprese Salad" data-price="14">
+                <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 5">
+                <div class="menu-item-content">
+                    <h3>Caprese Salad</h3>
+                    <p>Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze</p>
+                    <span class="price">$14</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="6" data-name="Beef Wellington" data-price="36">
+                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dish 6">
+                <div class="menu-item-content">
+                    <h3>Beef Wellington</h3>
+                    <p>Prime beef tenderloin wrapped in puff pastry with mushroom duxelles</p>
+                    <span class="price">$36</span>
+                    <button class="add-to-cart">Add to Order</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="order" class="order">
+        <h2 class="section-title">Order Online</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="margin-bottom: 2rem;">Browse our menu and add items to your cart. When you're ready, proceed to checkout for delivery or pickup.</p>
+            <a href="#menu" class="btn">View Full Menu</a>
+        </div>
+    </section>
+    
+    <section id="recommendations" class="recommendations">
+        <h2 class="section-title">You Might Also Like</h2>
+        <div class="restaurant-cards">
+            <div class="restaurant-card">
+                <h3>The Green Leaf</h3>
+                <p>Vegetarian and vegan cuisine with innovative plant-based dishes</p>
+                <a href="#" class="btn">Visit Website</a>
+            </div>
+            <div class="restaurant-card">
+                <h3>Ocean's Bounty</h3>
+                <p>Seafood restaurant specializing in fresh catches and sustainable fishing</p>
+                <a href="#" class="btn">Visit Website</a>
+            </div>
+            <div class="restaurant-card">
+                <h3>Fireside Grill</h3>
+                <p>Classic steakhouse with premium cuts and an extensive wine list</p>
+                <a href="#" class="btn">Visit Website</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2 class="section-title">Reservations</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visit Us</h3>
+                <p>123 Culinary Avenue<br>Gourmet District<br>Foodie City, FC 12345</p>
+                
+                <h3>Hours</h3>
+                <p>Monday - Thursday: 5pm - 10pm<br>
+                Friday - Saturday: 5pm - 11pm<br>
+                Sunday: 5pm - 9pm</p>
+                
+                <h3>Contact</h3>
+                <p>Phone: (123) 456-7890<br>
+                Email: info@savorybites.com</p>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Special Requests</label>
+                        <textarea id="message"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Book Table</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+        <p>&copy; 2023 Savory Bites. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Cart functionality
+        const cart = [];
+        const cartModal = document.getElementById('cartModal');
+        const overlay = document.getElementById('overlay');
+        const cartIcon = document.getElementById('cartIcon');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartCount = document.getElementById('cartCount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const continueShopping = document.getElementById('continueShopping');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const cancelCheckout = document.getElementById('cancelCheckout');
+        const checkoutForm = document.getElementById('checkoutForm');
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const menuItem = this.closest('.menu-item');
+                const itemId = menuItem.dataset.id;
+                const itemName = menuItem.dataset.name;
+                const itemPrice = parseFloat(menuItem.dataset.price);
+                
+                // Check if item already exists in cart
+                const existingItem = cart.find(item => item.id === itemId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: itemId,
+                        name: itemName,
+                        price: itemPrice,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                showNotification(`${itemName} added to cart`);
+            });
+        });
+        
+        // Update cart UI
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItemElement);
+            });
+            
+            cartTotal.textContent = total.toFixed(2);
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.dataset.id;
+                    const item = cart.find(item => item.id === itemId);
+                    
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.dataset.id;
+                    const item = cart.find(item => item.id === itemId);
+                    item.quantity += 1;
+                    updateCart();
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.dataset.id;
+                    const itemIndex = cart.findIndex(item => item.id === itemId);
+                    if (itemIndex !== -1) {
+                        cart.splice(itemIndex, 1);
+                        updateCart();
+                    }
+                });
+            });
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--primary)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '3000';
+            notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+            notification.style.animation = 'slideIn 0.3s, fadeOut 0.5s 2.5s';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Toggle cart modal
+        function toggleCart() {
+            cartModal.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        // Toggle checkout modal
+        function toggleCheckout() {
+            checkoutModal.classList.toggle('active');
+        }
+        
+        // Event listeners
+        cartIcon.addEventListener('click', toggleCart);
+        closeCart.addEventListener('click', toggleCart);
+        overlay.addEventListener('click', toggleCart);
+        continueShopping.addEventListener('click', toggleCart);
+        
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty');
+                return;
+            }
+            toggleCart();
+            toggleCheckout();
+        });
+        
+        cancelCheckout.addEventListener('click', () => {
+            toggleCheckout();
+            toggleCart();
+        });
+        
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send this data to your server
+            const orderData = {
+                customer: {
+                    name: document.getElementById('checkoutName').value,
+                    phone: document.getElementById('checkoutPhone').value,
+                    email: document.getElementById('checkoutEmail').value,
+                    address: document.getElementById('checkoutAddress').value
+                },
+                items: cart,
+                notes: document.getElementById('checkoutNotes').value,
+                total: parseFloat(cartTotal.textContent)
+            };
+            
+            console.log('Order submitted:', orderData);
+            
+            // Show confirmation
+            showNotification('Order placed successfully!');
+            
+            // Reset cart and close modals
+            cart.length = 0;
+            updateCart();
+            toggleCheckout();
+            this.reset();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Sticky navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
