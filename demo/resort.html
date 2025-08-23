@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aurora Cove Resort</title>
+  <meta name="description" content="Luxury beachfront resort with suites, spa, fine dining, and unforgettable experiences." />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-8iPTT1B+9D0b7m2z9f1b9zZ7+0i4lVYI8m5t3k4Y8y0v1lR8lU7XoKfO7jCqk8+2h1vQvW0Jjv0YF3O3nQ9sVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --bg:#0b0e12;
+      --bg-soft:#10151c;
+      --text:#eaeef5;
+      --muted:#9ca9c9;
+      --gold:#d4af37;
+      --gold-2:#e6c35c;
+      --card:#121824;
+      --glass:rgba(16,21,28,0.6);
+      --white:#ffffff;
+      --max:1200px;
+      --radius:18px;
+      --shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    
+    /* Layout */
+    .container{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:24px}
+
+    /* Navbar */
+    header{position:fixed;inset-inline:0;top:0;z-index:50;backdrop-filter:blur(10px);background:linear-gradient(180deg, rgba(11,14,18,.9), rgba(11,14,18,.6), transparent)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand i{color:var(--gold)}
+    .brand .logo{font-family:"Playfair Display", serif;font-weight:700;font-size:22px;letter-spacing:.6px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:-4px}
+
+    .navlinks{display:flex;gap:22px;align-items:center}
+    .navlinks a{color:var(--muted);font-weight:500}
+    .navlinks a:hover,.navlinks a.active{color:var(--white)}
+    .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:10px 16px;border:1px solid rgba(212,175,55,.35);color:var(--white);transition:.2s background}
+    .btn:hover{background:rgba(212,175,55,.12)}
+
+    .hamburger{display:none;font-size:22px}
+
+    /* Hero */
+    .hero{position:relative;min-height:92vh;display:grid;place-items:center;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1501117716987-c8e08b47a3c6?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;transform:scale(1.05)}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.75) 100%), linear-gradient(180deg, rgba(11,14,18,0) 0%, rgba(11,14,18,.85) 100%)}
+
+    .hero-inner{position:relative;z-index:1;text-align:center;padding:20vh 0 16vh}
+    .kicker{letter-spacing:.28em;color:var(--gold);text-transform:uppercase;font-weight:600}
+    h1{font-family:"Playfair Display", serif;font-size:64px;line-height:1.04;margin:.25em 0 .35em}
+    .subtitle{max-width:720px;margin-inline:auto;color:var(--muted);font-size:18px}
+    .cta{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{background:linear-gradient(180deg, var(--gold), var(--gold-2));color:#1b1200;border:none;box-shadow:0 8px 24px rgba(212,175,55,.35)}
+    .btn-primary:hover{filter:brightness(.95)}
+
+    /* Sections */
+    section{padding:80px 0}
+    .section-title{font-family:"Playfair Display", serif;font-size:40px;margin:0 0 10px}
+    .section-sub{color:var(--muted);margin:0 0 32px}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1.3fr 1fr;gap:28px}
+    .about-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .about-media{aspect-ratio:16/11;background:var(--card);overflow:hidden}
+    .about-media img{width:100%;height:100%;object-fit:cover}
+    .about-content{padding:26px}
+
+    .badges{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .badge{border:1px dashed rgba(212,175,55,.5);color:var(--gold);padding:6px 10px;border-radius:999px;font-size:12px}
+
+    /* Rooms */
+    .grid{display:grid;gap:18px}
+    .rooms .grid{grid-template-columns:repeat(3, 1fr)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card-media{aspect-ratio:16/11;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .card:hover .card-media img{transform:scale(1.06)}
+    .card-body{padding:18px;display:flex;flex-direction:column;gap:10px}
+    .pill{font-size:12px;color:#0e0a00;background:linear-gradient(180deg, var(--gold), var(--gold-2));align-self:flex-start;border-radius:999px;padding:6px 10px}
+    .features{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+    .price{margin-left:auto;font-weight:700}
+
+    /* Amenities */
+    .amenities .grid{grid-template-columns:repeat(4,1fr)}
+    .amen{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;display:flex;gap:14px;align-items:flex-start}
+    .amen i{font-size:22px;color:var(--gold)}
+
+    /* Gallery */
+    .gallery .grid{grid-template-columns:repeat(6,1fr)}
+    .thumb{aspect-ratio:1/1;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,.06)}
+    .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .thumb:hover img{transform:scale(1.06)}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:min(92vw,1200px);max-height:86vh;border-radius:14px;box-shadow:var(--shadow)}
+    .lightbox .close{position:fixed;top:22px;right:22px;font-size:28px;color:#fff;cursor:pointer}
+
+    /* Testimonials */
+    .testimonials .slider{position:relative}
+    .slide{display:none}
+    .slide.active{display:block}
+    .quote{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);padding:26px;border-radius:16px;box-shadow:var(--shadow)}
+    .stars{color:var(--gold);margin-bottom:8px}
+    .dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.4);cursor:pointer}
+    .dot.active{background:var(--gold);border-color:var(--gold)}
+
+    /* Booking */
+    .booking{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
+    form{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);padding:22px;border-radius:16px;box-shadow:var(--shadow)}
+    .field{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+    label{color:var(--muted);font-size:14px}
+    input,select,textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;color:var(--text);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+
+    .contact-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);padding:22px;border-radius:16px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+    .contact-item{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+    .contact-item i{color:var(--gold);margin-top:4px}
+    .map{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.08);padding:34px 0;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01))}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px}
+    .socials{display:flex;gap:12px}
+    .socials a{width:36px;height:36px;display:grid;place-items:center;border-radius:999px;border:1px solid rgba(255,255,255,.1)}
+
+    /* Back to top */
+    #toTop{position:fixed;right:18px;bottom:18px;border-radius:999px;width:44px;height:44px;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;background:rgba(0,0,0,.3);backdrop-filter:blur(6px);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+    #toTop.show{opacity:1;pointer-events:auto}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .about{grid-template-columns:1fr}
+      .rooms .grid{grid-template-columns:repeat(2,1fr)}
+      .amenities .grid{grid-template-columns:repeat(2,1fr)}
+      .gallery .grid{grid-template-columns:repeat(4,1fr)}
+      .booking{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      h1{font-size:42px}
+      .navlinks{position:absolute;top:64px;right:16px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;flex-direction:column;gap:10px;display:none}
+      .navlinks.open{display:flex}
+      .hamburger{display:block}
+      .rooms .grid{grid-template-columns:1fr}
+      .amenities .grid{grid-template-columns:1fr}
+      .gallery .grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <i class="fa-solid fa-sun"></i>
+        <div>
+          <div class="logo">Aurora Cove</div>
+          <small>Luxury Resort & Spa</small>
+        </div>
+      </a>
+      <nav class="navlinks" id="navlinks">
+        <a href="#about" class="active">About</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#booking" class="btn btn-primary"><i class="fa-regular fa-calendar"></i> Book Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-inner container">
+      <div class="kicker">Welcome to paradise</div>
+      <h1>Where Luxury Meets the Ocean</h1>
+      <p class="subtitle">Experience handcrafted hospitality, oceanfront suites, award‑winning dining, and a tranquil spa sanctuary—curated for unforgettable moments.</p>
+      <div class="cta">
+        <a href="#rooms" class="btn"><i class="fa-solid fa-bed"></i> Explore Suites</a>
+        <a href="#booking" class="btn btn-primary"><i class="fa-regular fa-calendar"></i> Book Your Stay</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="container">
+    <div class="about">
+      <div class="about-card">
+        <div class="about-media"><img alt="Resort overview" src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=1600&auto=format&fit=crop"></div>
+        <div class="about-content">
+          <h2 class="section-title">The Aurora Story</h2>
+          <p class="section-sub">Rooted in timeless elegance and wrapped in modern comfort, Aurora Cove is a beachfront escape designed for slow mornings, golden sunsets, and elevated experiences.</p>
+          <div class="badges">
+            <span class="badge"><i class="fa-solid fa-medal"></i> Award‑Winning Spa</span>
+            <span class="badge"><i class="fa-solid fa-utensils"></i> Fine Dining</span>
+            <span class="badge"><i class="fa-solid fa-water"></i> Private Beach</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-media"><img alt="Private pool suite" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1600&auto=format&fit=crop"></div>
+        <div class="about-content">
+          <h3 style="margin:0 0 8px;font-family:Playfair Display, serif;font-size:28px">Crafted for Comfort</h3>
+          <p style="margin:0 0 12px;color:var(--muted)">Every suite is outfitted with premium linens, artisan amenities, and panoramic views. Your sanctuary awaits.</p>
+          <a href="#rooms" class="btn">Discover Rooms</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms & Suites -->
+  <section id="rooms" class="rooms container">
+    <h2 class="section-title">Rooms & Suites</h2>
+    <p class="section-sub">Choose from oceanview rooms, private villas, and signature penthouses.</p>
+
+    <div class="grid">
+      <!-- Room Card -->
+      <article class="card">
+        <div class="card-media"><img alt="Oceanview Room" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop"></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;align-items:center">
+            <h3 style="margin:0;font-family:Playfair Display, serif;font-size:24px">Oceanview Room</h3>
+            <span class="pill">$249 / night</span>
+          </div>
+          <div class="features">
+            <span><i class="fa-solid fa-ruler-combined"></i> 35 m²</span>
+            <span><i class="fa-solid fa-person-shelter"></i> 2 Guests</span>
+            <span><i class="fa-solid fa-mug-saucer"></i> Breakfast</span>
+            <span class="price"></span>
+          </div>
+          <a href="#booking" class="btn" aria-label="Book Oceanview Room"><i class="fa-regular fa-calendar"></i> Book</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media"><img alt="Private Villa" src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1600&auto=format&fit=crop"></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;align-items:center">
+            <h3 style="margin:0;font-family:Playfair Display, serif;font-size:24px">Private Pool Villa</h3>
+            <span class="pill">$549 / night</span>
+          </div>
+          <div class="features">
+            <span><i class="fa-solid fa-ruler-combined"></i> 120 m²</span>
+            <span><i class="fa-solid fa-person-shelter"></i> 4 Guests</span>
+            <span><i class="fa-solid fa-water-ladder"></i> Private Pool</span>
+          </div>
+          <a href="#booking" class="btn"><i class="fa-regular fa-calendar"></i> Book</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media"><img alt="Penthouse Suite" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop"></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;align-items:center">
+            <h3 style="margin:0;font-family:Playfair Display, serif;font-size:24px">Signature Penthouse</h3>
+            <span class="pill">$899 / night</span>
+          </div>
+          <div class="features">
+            <span><i class="fa-solid fa-ruler-combined"></i> 180 m²</span>
+            <span><i class="fa-solid fa-person-shelter"></i> 4 Guests</span>
+            <span><i class="fa-solid fa-champagne-glasses"></i> Lounge</span>
+          </div>
+          <a href="#booking" class="btn"><i class="fa-regular fa-calendar"></i> Book</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Amenities & Activities -->
+  <section id="amenities" class="amenities container">
+    <h2 class="section-title">Amenities & Activities</h2>
+    <p class="section-sub">Everything you need to slow down—or turn up.</p>
+
+    <div class="grid">
+      <div class="amen"><i class="fa-solid fa-spa"></i><div><h4 style="margin:0 0 6px">Holistic Spa</h4><p class="section-sub" style="margin:0">Therapies, sauna, and ocean‑salt rituals.</p></div></div>
+      <div class="amen"><i class="fa-solid fa-utensils"></i><div><h4 style="margin:0 0 6px">Fine Dining</h4><p class="section-sub" style="margin:0">Chef‑curated seasonal menus.</p></div></div>
+      <div class="amen"><i class="fa-solid fa-water"></i><div><h4 style="margin:0 0 6px">Private Beach</h4><p class="section-sub" style="margin:0">White sands & crystal waters.</p></div></div>
+      <div class="amen"><i class="fa-solid fa-person-hiking"></i><div><h4 style="margin:0 0 6px">Adventures</h4><p class="section-sub" style="margin:0">Diving, sailing, island tours.</p></div></div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="gallery container">
+    <h2 class="section-title">Gallery</h2>
+    <p class="section-sub">Tap to view full‑screen.</p>
+
+    <div class="grid" id="galleryGrid">
+      <!-- 12 thumbs -->
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800&auto=format&fit=crop" alt="Gallery image 1"></div>
+      <!-- <div class="thumb"><img src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=800&auto=format&fit=crop" alt="Gallery image 2"></div> -->
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=800&auto=format&fit=crop" alt="Gallery image 3"></div>
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=800&auto=format&fit=crop" alt="Gallery image 4"></div>
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop" alt="Gallery image 5"></div>
+      <!-- <div class="thumb"><img src="https://images.unsplash.com/photo-1474925558543-e7a5f06e733b?q=80&w=800&auto=format&fit=crop" alt="Gallery image 6"></div> -->
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&w=800&auto=format&fit=crop" alt="Gallery image 7"></div>
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1469796466635-455ede028aca?q=80&w=800&auto=format&fit=crop" alt="Gallery image 8"></div>
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop" alt="Gallery image 9"></div>
+      <!-- <div class="thumb"><img src="https://images.unsplash.com/photo-1500043357865-c6b8827edf14?q=80&w=800&auto=format&fit=crop" alt="Gallery image 10"></div> -->
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1535551951406-a19828b0a76b?q=80&w=800&auto=format&fit=crop" alt="Gallery image 11"></div>
+      <!-- <div class="thumb"><img src="https://images.unsplash.com/photo-1501776193017-61137c9ab7ad?q=80&w=800&auto=format&fit=crop" alt="Gallery image 12"></div> -->
+    </div>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <span class="close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></span>
+      <img id="lightboxImg" alt="Expanded gallery image" />
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials container">
+    <h2 class="section-title">What Guests Say</h2>
+    <p class="section-sub">Real stories from unforgettable stays.</p>
+
+    <div class="slider" id="slider">
+      <div class="slide active">
+        <div class="quote">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p>“Truly magical. The views, the service, the food—everything exceeded expectations.”</p>
+          <p style="color:var(--muted);margin:0">— Priya K.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="quote">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+          <p>“A serene escape. Loved the spa rituals and private beach mornings.”</p>
+          <p style="color:var(--muted);margin:0">— Arjun M.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="quote">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p>“The penthouse is stunning. Seamless booking and warm staff.”</p>
+          <p style="color:var(--muted);margin:0">— Neha S.</p>
+        </div>
+      </div>
+      <div class="dots" id="dots" aria-label="Slider pagination"></div>
+    </div>
+  </section>
+
+  <!-- Booking & Contact -->
+  <section id="booking" class="container">
+    <h2 class="section-title">Book Your Stay</h2>
+    <p class="section-sub">Plan your escape—simple, fast, secure.</p>
+
+    <div class="booking">
+      <form id="bookingForm" aria-label="Booking form">
+        <div class="field"><label for="checkin">Check‑in</label><input type="date" id="checkin" required></div>
+        <div class="field"><label for="checkout">Check‑out</label><input type="date" id="checkout" required></div>
+        <div class="field"><label for="guests">Guests</label>
+          <select id="guests" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="field"><label for="room">Room Type</label>
+          <select id="room" required>
+            <option>Oceanview Room</option>
+            <option>Private Pool Villa</option>
+            <option>Signature Penthouse</option>
+          </select>
+        </div>
+        <div class="field"><label for="name">Full Name</label><input type="text" id="name" placeholder="Your name" required></div>
+        <div class="field"><label for="email">Email</label><input type="email" id="email" placeholder="you@example.com" required></div>
+        <div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" rows="3" placeholder="Any special requests?"></textarea></div>
+        <button class="btn btn-primary" type="submit"><i class="fa-regular fa-calendar-check"></i> Confirm Booking</button>
+        <p id="formMsg" style="margin-top:10px;color:var(--muted)"></p>
+      </form>
+
+      <div class="contact-card">
+        <h3 style="margin:0 0 6px;font-family:Playfair Display, serif">Location & Contact</h3>
+        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>Sunset Bay, Emerald Coast 400021</div></div>
+        <div class="contact-item"><i class="fa-solid fa-phone"></i><div>+91 98765 43210</div></div>
+        <div class="contact-item"><i class="fa-regular fa-envelope"></i><div>stay@auroracove.com</div></div>
+        <div class="map">
+          <iframe title="Resort location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609838517!2d72.74110085154533!3d19.08219783993788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63f9a16f085%3A0x8f8f4a0d2d959f2a!2sArabian%20Sea!5e0!3m2!1sen!2sin!4v1689761825311!5m2!1sen!2sin" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgraded"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="logo" style="font-family:Playfair Display, serif;font-weight:700;font-size:24px;margin-bottom:8px">Aurora Cove</div>
+        <p class="section-sub">A luxury resort where every detail is designed to delight.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin:0 0 10px">Resort</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;color:var(--muted)">
+          <li><a href="#about">About</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 10px">Support</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;color:var(--muted)">
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Policies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 10px">Contact</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;color:var(--muted)">
+          <li>+91 98765 43210</li>
+          <li>stay@auroracove.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container" style="margin-top:18px;color:var(--muted);font-size:14px">© <span id="year"></span> Aurora Cove Resort. All rights reserved.</div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navlinks = document.getElementById('navlinks');
+    hamburger.addEventListener('click', ()=> navlinks.classList.toggle('open'));
+
+    // Smooth scroll & active link highlight
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length > 1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+          navlinks.classList.remove('open');
+        }
+      })
+    })
+
+    // Back to top button
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 600){ toTop.classList.add('show') } else { toTop.classList.remove('show') }
+    });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    document.querySelectorAll('#galleryGrid .thumb img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        lightboxImg.src = img.src.replace("w=800","w=1600");
+        lightbox.classList.add('open');
+      })
+    })
+    lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox || e.target===lightboxClose || lightboxClose.contains(e.target)) lightbox.classList.remove('open') });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') lightbox.classList.remove('open') });
+
+    // Testimonials slider
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = document.getElementById('dots');
+    let index = 0;
+    const makeDots = ()=>{
+      slides.forEach((_,i)=>{
+        const d = document.createElement('button');
+        d.className = 'dot' + (i===0?' active':'');
+        d.setAttribute('aria-label', 'Go to slide ' + (i+1));
+        d.addEventListener('click', ()=> show(i));
+        dots.appendChild(d);
+      })
+    }
+    const show = (i)=>{
+      slides[index].classList.remove('active');
+      dots.children[index].classList.remove('active');
+      index = i;
+      slides[index].classList.add('active');
+      dots.children[index].classList.add('active');
+    }
+    makeDots();
+    setInterval(()=> show((index+1)%slides.length), 5000);
+
+    // Form handling (demo)
+    const form = document.getElementById('bookingForm');
+    const formMsg = document.getElementById('formMsg');
+    const ci = document.getElementById('checkin');
+    const co = document.getElementById('checkout');
+    const today = new Date().toISOString().split('T')[0];
+    ci.min = today; co.min = today;
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(co.value <= ci.value){
+        formMsg.style.color = '#ffb4b4';
+        formMsg.textContent = 'Checkout must be after check‑in.';
+        return;
+      }
+      formMsg.style.color = 'var(--gold)';
+      formMsg.textContent = 'Thank you! Your booking request has been received. We\'ll contact you shortly.';
+      form.reset();
+    })
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
